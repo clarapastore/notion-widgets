@@ -124,11 +124,11 @@
                 "July", "August", "September", "October", "November", "December"
             ];
 
-            var dayName = days[today.getDay()];
-            var monthName = monthNames[today.getMonth()];
+            var dayName = days[today.getDay()].toUpperCase();
+            var monthName = monthNames[today.getMonth()].toUpperCase();
             var date = today.getDate();
             var year = today.getFullYear();
-            document.getElementById('date').innerHTML = dayName.toUpperCase() + ", " + monthName.toUpperCase() + " " + date.toUpperCase() + " " + year;
+            document.getElementById('date').innerHTML = dayName + ", " + monthName + " " + date + " " + year;
 
         }
 
