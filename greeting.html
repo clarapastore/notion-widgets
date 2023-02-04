@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Nova+Mono&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /*
+  2. Remove default margin
+*/
+        * {
+            margin: 0;
+        }
+
+        body {
+            background-color: #191919;
+            display: flex;
+            width: 1200px;
+            height: min-content;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-content: center;
+            gap: 10px;
+            width: 1200px;
+            overflow: hidden;
+        }
+
+        .outer-container {
+            width: 100%;
+            height: 312px;
+            background-color: #191919;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            position: absolute;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            border: 1px dashed #ffffff;
+            box-sizing: border-box;
+            width: 1111px;
+            height: 243px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            justify-items: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #greeting {
+            color: #ffffff;
+            font-family: "Lato", sans-serif;
+            font-size: 36px;
+            width: auto;
+            height: auto;
+            white-space: pre;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: 0px;
+            line-height: 1.2;
+        }
+
+        .day,
+        .time,
+        .colon {
+            color: #ffffff;
+            font-family: nova mono, monospace;
+            font-size: 36px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="outer-container">
+        <div class="container">
+            <p id="greeting">Good Morning</p>
+            <p class="day" id="date"></p>
+            <div class="clock">
+                <span class="time" id="hour"></span>
+                <span class="colon">:</span>
+                <span class="time" id="min"></span>
+                <span class="colon">:</span>
+                <span class="time" id="sec"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        function dispalyGreetings(today) {
+            hrs = today.getHours();
+            name = ""
+            if (hrs < 12)
+                greet = 'Good Morning  ' + name;
+            else if (hrs >= 12 && hrs <= 17)
+                greet = 'Good Afternoon ' + name;
+            else if (hrs >= 17 && hrs <= 24)
+                greet = 'Good Evening  ' + name;
+            document.getElementById('greeting').innerHTML = greet.toUpperCase();
+
+        }
+
+        function dispalyDate(today) {
+
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            var dayName = days[today.getDay()];
+            var monthName = monthNames[today.getMonth()];
+            var date = today.getDate();
+            var year = today.getFullYear();
+            document.getElementById('date').innerHTML = dayName + ", " + monthName + " " + date + " " + year;
+
+        }
+
+
+        function dispalyClock(today) {
+
+            var hour = padZeros(today.getHours());
+            var minutes = padZeros(today.getMinutes());
+            var seconds = padZeros(today.getSeconds());
+
+            document.getElementById('hour').innerHTML = hour;
+            document.getElementById('min').innerHTML = minutes;
+            document.getElementById('sec').innerHTML = seconds;
+        }
+
+        function padZeros(num) {
+            if (num < 10) {
+                num = '0' + num
+            };
+            return num;
+        }
+
+        function dispalyWidget() {
+            var today = new Date();
+            dispalyGreetings(today);
+            dispalyDate(today);
+            dispalyClock(today);
+            setTimeout(dispalyWidget, 500);
+        }
+
+        dispalyWidget()
+
+    </script>
+</body>
+
+</html>
